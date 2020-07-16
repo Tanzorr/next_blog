@@ -1,5 +1,10 @@
+import React from "react";
+import {Provider} from 'react-redux';
 import '../styles/main.scss'
 import NextNprogress from 'nextjs-progressbar';
+import store from '../libs/store'
+
+
 export default function MyApp({Component, pageProps}) {
     return(
         <>
@@ -9,7 +14,10 @@ export default function MyApp({Component, pageProps}) {
                 stopDelayMs="200"
                 height="3"
             />
-            <Component {...pageProps} />
+            <Provider store={store}>
+                <Component {...pageProps} />
+            </Provider>
+
             </>
     )
 }

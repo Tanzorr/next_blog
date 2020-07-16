@@ -1,5 +1,5 @@
 import axios from "axios";
-import {MyPost} from "../../interfeces/post";
+import {MyPost} from "../interfeces/post";
 
 let baseURL = "https://simple-blog-api.crew.red/";
 interface ResponseType {
@@ -12,7 +12,8 @@ export const postsAPI={
         })
     },
 
-    getPost(id:string | number){
+    getPost(id: number){
+        console.log("appId",id)
         return axios.get<MyPost>(`${baseURL}posts/${id}?_embed=comments`).then(response=>{
             return response.data
         })

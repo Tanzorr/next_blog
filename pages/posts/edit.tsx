@@ -4,7 +4,7 @@ import {MainLayout} from "../../components/MainLayout";
 
 import {useRouter} from "next/router";
 
-import {postsAPI} from "../api/api";
+import {postsAPI} from "../../api/api";
 import {NextPageContext} from "next";
 import {MyPost} from "../../interfeces/post";
 

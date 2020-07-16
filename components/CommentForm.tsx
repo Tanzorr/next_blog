@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {commentsAPI, postsAPI} from "../pages/api/api";
+import {commentsAPI, postsAPI} from "../api/api";
 
 
 export  default function CommentForm(id:any){

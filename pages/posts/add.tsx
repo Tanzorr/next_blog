@@ -4,7 +4,7 @@ import {MainLayout} from "../../components/MainLayout";
 
 import {useRouter} from "next/router";
 
-import {postsAPI} from "../api/api";
+import {postsAPI} from "../../api/api";
 
 
 
@@ -18,7 +18,7 @@ export default function Add() {
         postsAPI.addPost(title,body)
         setTitle("");
         setBody("");
-        router.push('')
+        router.push('/posts')
     }
 
     return(
