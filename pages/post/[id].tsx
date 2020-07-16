@@ -4,6 +4,7 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import {NextPageContext} from "next";
 import {MyPost} from "../../interfeces/post";
+import {postsAPI} from "../api/api";
 interface PostPageProps {
     post:MyPost
 }
@@ -11,23 +12,22 @@ interface PostPageProps {
 export default function Post({post:serverPost}:PostPageProps) {
     const [post,setPost]=useState(serverPost)
     const router = useRouter()
-    useEffect(()=>{
-        async function load() {
-            const response =await fetch(`http://localhost:4200/posts/`+router.query.id)
-            const post = await  response.json()
-            setPost(post)
-        }
-        if(!serverPost){
-            load()
-        }
-        if (!post){
-            return<MainLayout>
-                <p>Loading...</p>
-            </MainLayout>
-        }
-    },[])
-
-    //const router = useRouter();
+    // useEffect(()=>{
+    //     async function load() {
+    //         const response =await fetch(`http://localhost:4200/posts/`+router.query.id)
+    //         const post = await  response.json()
+    //         setPost(post)
+    //     }
+    //     if(!serverPost){
+    //         load()
+    //     }
+    //     if (!post){
+    //         return<MainLayout>
+    //             <p>Loading...</p>
+    //         </MainLayout>
+    //     }
+    // },[])
+        console.log("post",post)
 
     return(
         <MainLayout>
@@ -65,8 +65,8 @@ export async function getServerSideProps({query,req}:PostNextPageContext) {
         return {posrt:null}
     }
 
-    const response =await fetch(`http://localhost:4200/posts/`+query.id)
-    const post:MyPost = await  response.json()
+    //    const response =await fetch(`http://localhost:4200/posts/`+query.id)
+    const post:MyPost = await  postsAPI.getPost(query.id)
       return {
          props:{post}
     }

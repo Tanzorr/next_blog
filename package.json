@@ -10,6 +10,7 @@
     "mock": "json-server -w db.json -p 4200 -d 1750"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "next": "9.4.4",
     "nextjs-progressbar": "0.0.5",
     "react": "16.13.1",

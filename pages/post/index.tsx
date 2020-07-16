@@ -6,13 +6,14 @@ import {MainLayout} from "../../components/MainLayout";
 import Link from "next/link";
 import {MyPost} from "../../interfeces/post";
 import {NextPageContext} from "next";
+import {postsAPI} from "../api/api";
 
 interface PostsPageProps {
     posts:MyPost[]
 }
 
 export default function Post({posts}:PostsPageProps) {
-
+    console.log("pstst",posts)
     // const [posts, setPosts]=useState([])
     //
     // useEffect(()=>{
@@ -45,10 +46,13 @@ Post.getInitialProps = async ({req}:NextPageContext)=>{
 
 
 
-    const response =await fetch(`http://localhost:4200/posts`)
-            const posts:MyPost[] = await  response.json()
+   // const response =await fetch(`http://localhost:4200/posts`)
+    const  posts = await postsAPI.getPosts()
+           // const posts:MyPost[] = await  response.json()
+
+
             return {
-                posts
+                posts:posts
             }
 
 
