@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "serve": "concurrently \"npm run dev\" \"npm run mock\"",
-    "mock": "json-server -w db.json -p 4200 -d 420"
+    "mock": "json-server -w db.json -p 4300 -d 420"
   },
   "dependencies": {
     "axios": "^0.19.2",
