@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react'
 import {MainLayout} from "../../components/MainLayout";
+
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {NextPageContext} from "next";
 import {MyPost} from "../../interfeces/post";
 import {postsAPI} from "../api/api";
+import Comment from "../../components/Comment";
 interface PostPageProps {
     post:MyPost
 }
@@ -12,22 +14,8 @@ interface PostPageProps {
 export default function Post({post:serverPost}:PostPageProps) {
     const [post,setPost]=useState(serverPost)
     const router = useRouter()
-    // useEffect(()=>{
-    //     async function load() {
-    //         const response =await fetch(`http://localhost:4200/posts/`+router.query.id)
-    //         const post = await  response.json()
-    //         setPost(post)
-    //     }
-    //     if(!serverPost){
-    //         load()
-    //     }
-    //     if (!post){
-    //         return<MainLayout>
-    //             <p>Loading...</p>
-    //         </MainLayout>
-    //     }
-    // },[])
-        console.log("post",post)
+
+        console.log("comment",post.comments)
 
     return(
         <MainLayout>
@@ -36,7 +24,10 @@ export default function Post({post:serverPost}:PostPageProps) {
             <div>
                 {post.body}
             </div>
-            <Link href={'/post'}><a>Back to all posts</a></Link>
+            <div>
+                {post.comments.map(c=><Comment comment={c}/>)}
+            </div>
+            <Link href={'/posts'}><a>Back to all posts</a></Link>
             </MainLayout>
     )
 }

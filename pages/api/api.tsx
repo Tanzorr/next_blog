@@ -18,11 +18,9 @@ export const postsAPI={
         })
     },
 
-    addPost(data:{title,body}){
-        return axios.post(`${baseURL}posts/${data}`).then(response=>{
-            return response.data
-        })
-    },
+    addPost(title,body) {
+        return axios.post(`${baseURL}posts/`,{title, body})
+},
 
     editPost(id,data:{title,body}){
         return axios.put(`${baseURL}posts/${id}/${data}`).then(response=>{
