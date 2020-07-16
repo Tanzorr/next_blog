@@ -18,6 +18,7 @@ export default function Add() {
         postsAPI.addPost(title,body)
         setTitle("");
         setBody("");
+        router.push('')
     }
 
     return(

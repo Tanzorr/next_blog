@@ -22,8 +22,8 @@ export const postsAPI={
         return axios.post(`${baseURL}posts/`,{title, body})
 },
 
-    editPost(id,data:{title,body}){
-        return axios.put(`${baseURL}posts/${id}/${data}`).then(response=>{
+    editPost(id,title,body){
+        return axios.put(`${baseURL}posts/${id}`, {title,body}).then(response=>{
             return response.data
         })
     },
@@ -38,8 +38,8 @@ export const postsAPI={
 }
 
 export  const commentsAPI={
-    addCommet(data:{postId:string |number,body:string}){
-        return axios.delete(`${baseURL}comments/${data}`).then(response=>{
+    addCommet(postId,body){
+        return axios.post(`${baseURL}comments/`,{postId,body}).then(response=>{
             return response.data
         })
     }

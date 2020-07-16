@@ -13,39 +13,35 @@ interface PostsPageProps {
 }
 
 export default function Post({posts}:PostsPageProps) {
-    console.log("pstst",posts)
 
-    if(posts){
-    posts.map((p,i)=>{
-            console.log("p",p)
-           return (
-               <ul className='list-group'>
-                   <li key={i} className='list-group-item'>
-                       <Link href={`/post/{id}`} as={`/post/${p.id}`}>
-                                      <a>{p.title}</a>
-                                  </Link>
 
-                   </li>
-               </ul>
-           )
-       })
-    }
+
+
     return(
         <MainLayout>
             <h1>Post Page</h1>
             <ul className='list-group'>
             {
                 posts ? posts.map((p,i)=>{
-                console.log("p",p)
+
                 return (
 
-                <li key={i} className='list-group-item'>
-                <Link href={`/post/{id}`} as={`/post/${p.id}`}>
-                <a>{p.title}</a>
-                </Link>
-                </li>
+                <li key={i} className='list-group-item '>
+                        <div className="d-flex justify-content-between">
+                            <Link href={`/posts/{id}`} as={`/posts/${p.id}`}>
+                                <a>{p.title}</a>
+                            </Link>
+                            <div>
+                                <Link href={'/posts/edit/{id}'} as={`/posts/edit?id=${p.id}`}>
+                                    <a>edit</a>
+                                </Link>
+                                <button onClick={()=>{postsAPI.deletePost(p.id)}} className='btn btn-danger ml-5'> delete</button>
+                            </div>
 
-                )
+                        </div>
+
+
+                </li>)
             }):" No posts"
             }
             </ul>

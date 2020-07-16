@@ -7,6 +7,8 @@ import {NextPageContext} from "next";
 import {MyPost} from "../../interfeces/post";
 import {postsAPI} from "../api/api";
 import Comment from "../../components/Comment";
+import CommentForm from "../../components/CommentForm";
+
 interface PostPageProps {
     post:MyPost
 }
@@ -15,7 +17,7 @@ export default function Post({post:serverPost}:PostPageProps) {
     const [post,setPost]=useState(serverPost)
     const router = useRouter()
 
-        console.log("comment",post.comments)
+        console.log("comment",post)
 
     return(
         <MainLayout>
@@ -26,23 +28,15 @@ export default function Post({post:serverPost}:PostPageProps) {
             </div>
             <div>
                 {post.comments.map(c=><Comment comment={c}/>)}
+                <CommentForm id={post.id}/>
             </div>
             <Link href={'/posts'}><a>Back to all posts</a></Link>
+
             </MainLayout>
     )
 }
 
-// Post.getInitialProps = async ({query,req}) => {
-//     if (!req){
-//         return {post:null}
-//     }
-//     const response =await fetch(`http://localhost:4200/posts/`+query.id)
-//     const post = await  response.json()
-//     return {
-//         post:post
-//     }
-//
-// }
+
 
 interface PostNextPageContext extends NextPageContext{
     query:{
