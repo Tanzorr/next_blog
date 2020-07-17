@@ -1,29 +1,35 @@
 import {useState} from "react";
 import {commentsAPI, postsAPI} from "../api/api";
+import {Container, Lin, Textarea, Title2} from "../pages/index.styles";
 
 
-export  default function CommentForm(id:any){
+export  default function CommentForm(id:number){
     const [body,setBody]=useState('')
 
-    const sendData=(id, body)=>{
-        commentsAPI.addCommet(id,body)
+    const sendData=(id:number, body:string)=>{
+        if(body !==""){
+            commentsAPI.addCommet(id,body)
+        }else {
+            alert("field cannot be empty")
+        }
+
 
         setBody("");
     }
 
     return(
         <>
-            <p>
+            <Title2>
                 Comment form
-            </p>
-            <div  className="form-group" >
-                <textarea className="form-control" onChange={ (e)=>{setBody(e.target.value) }} value={body}/>
+            </Title2>
+            <Container  className="form-group" >
+                <Textarea className="form-control" onChange={ (e:any)=>{setBody(e.target.value) }} value={body}/>
 
-            </div>
-            <div className="form-group">
-                <button onClick={()=>{sendData(id,body)}} >Send</button>
+            </Container>
+            <Container className="form-group">
+                <Lin onClick={()=>{sendData(id,body)}} >Send</Lin>
 
-            </div>
+            </Container>
 
         </>
     )

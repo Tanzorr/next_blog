@@ -1,3 +1,5 @@
+import {MyPost} from "./interfeces/post";
+
 export  default  interface CommentType {
     postId:number,
     body:string
@@ -9,6 +11,11 @@ export default  interface PostType {
     title:string,
     body:string,
     comments:CommentType[]}
+}
+
+export interface PostPageProps {
+    post:MyPost
+    getPost:void
 }
 
 

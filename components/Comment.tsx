@@ -1,13 +1,14 @@
 import CommentType from "../Interfeces";
+import {Container} from "../pages/index.styles";
 
 
  function Comment(c:CommentType){
-    console.log("Cooment",c.c)
+
     return(
         <>
-            <p>
-                {c.c.body}
-            </p>
+            <Container>
+                {c.body}
+            </Container>
 
             </>
     )
