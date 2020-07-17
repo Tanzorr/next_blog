@@ -13,10 +13,7 @@ interface PostsPageProps {
     posts:MyPost[]
 }
 
-const a_btn = styled.a`
-    color:green;
-    font-size:28
-`;
+
 
  function Posts({posts,getPosts,deletePost}) {
 
