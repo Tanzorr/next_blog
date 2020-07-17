@@ -15,9 +15,9 @@ export function MainLayout({children, title='Next App'}) {
                         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"/>
             </Head>
             <nav>
-               <Link href={'/'}><a>Home</a></Link>
-               <Link href={'/posts/add'}><a>Add Post</a></Link>
-               <Link href={'/posts'}><a>Post</a></Link>
+
+               <Link href={'/posts/naw'}><a>Add Post</a></Link>
+               <Link href={'/posts'}><a>Posts</a></Link>
             </nav>
             <main>
                 {children}

@@ -8,17 +8,20 @@ import {postsAPI} from "../../api/api";
 
 
 
-export default function Add() {
+export default function Naw() {
 
     const [title,setTitle]=useState('')
     const [body,setBody]=useState('')
     const router = useRouter()
 
     const sendData=async (title, body)=>{
-      await  postsAPI.addPost(title,body)
-        setTitle("");
-        setBody("");
-       await router.push('/posts')
+        if(title!=="" || body!==""){
+            await  postsAPI.addPost(title,body)
+            setTitle("");
+            setBody("");
+            await router.push('/posts')
+        }
+
     }
 
     return(
