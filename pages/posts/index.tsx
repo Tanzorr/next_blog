@@ -7,15 +7,17 @@ import {MainLayout} from "../../components/MainLayout";
 import Link from "next/link";
 import {MyPost} from "../../interfeces/post";
 import {getPosts,deletePost} from "../../libs/reducers/posts";
-import styled from 'styled-components'
+
 
 interface PostsPageProps {
     posts:MyPost[]
+    getPosts:void
+    deletePost:void
 }
 
 
 
- function Posts({posts,getPosts,deletePost}) {
+ function Posts({posts,getPosts,deletePost}:PostsPageProps) {
 
      useEffect(()=>{ getPosts()},[])
 
@@ -55,16 +57,8 @@ interface PostsPageProps {
     )
 }
 
-//
-// Post.getInitialProps = async ({req}:NextPageContext)=>{
-//     const  posts = await postsAPI.getPosts()
-//
-//     return {
-//                 posts:posts
-//             }
-// }
 
-const mapStateToProps =(state)=>{
+const mapStateToProps =(state:any)=>{
    return {
        posts:state.postsReducer.posts,
 

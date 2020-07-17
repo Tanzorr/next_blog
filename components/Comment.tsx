@@ -1,13 +1,16 @@
+import CommentType from "../Interfeces";
 
 
-
-export  default function Comment(comment:any){
+ function Comment(c:CommentType){
+    console.log("Cooment",c.c)
     return(
         <>
             <p>
-                {comment}
+                {c.c.body}
             </p>
 
             </>
     )
 }
+
+export default Comment

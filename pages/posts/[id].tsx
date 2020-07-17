@@ -9,13 +9,15 @@ import {postsAPI} from "../../api/api";
 import Comment from "../../components/Comment";
 import CommentForm from "../../components/CommentForm";
 import {getPost} from "../../libs/reducers/posts";
+import CommentType from "../../Interfeces";
 
 interface PostPageProps {
     post:MyPost
+    getPost:void
 }
 
-function Post({post,getPost}) {
-    //const [post,setPost]=useState(serverPost)
+function Post({post,getPost}:PostPageProps) {
+
     const router = useRouter()
     const Post = router.query
 
@@ -31,7 +33,10 @@ function Post({post,getPost}) {
                 {post.body}
             </div>
             <div>
-                {post.comments.map(c=><Comment comment={c}/>)}
+                <h3>Post comments</h3>
+                {post.comments.map((c)=>{
+                   return  <Comment  c={c}/>
+                })}
                 <CommentForm id={post.id}/>
             </div>
             <Link href={'/posts'}><a>Back to all posts</a></Link>
@@ -61,7 +66,7 @@ interface PostNextPageContext extends NextPageContext{
 //     }
 // }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state:any)=>{
     return{
         post:state.postsReducer.post,
     }
