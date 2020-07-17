@@ -1,18 +1,23 @@
 import {Fragment} from "react";
 import Router from "next/router";
 import {useState,useEffect} from'react';
-
+import withRedux from 'next-redux-wrapper'
+import {connect} from "react-redux";
 import {MainLayout} from "../../components/MainLayout";
 import Link from "next/link";
 import {MyPost} from "../../interfeces/post";
-import {NextPageContext} from "next";
-import {postsAPI} from "../api/api";
+import {getPosts,deletePost} from "../../libs/reducers/posts";
+import styled from 'styled-components'
 
 interface PostsPageProps {
     posts:MyPost[]
 }
 
-export default function Post({posts}:PostsPageProps) {
+
+
+ function Posts({posts,getPosts,deletePost}) {
+
+     useEffect(()=>{ getPosts()},[])
 
 
 
@@ -22,7 +27,7 @@ export default function Post({posts}:PostsPageProps) {
             <h1>Post Page</h1>
             <ul className='list-group'>
             {
-                posts ? posts.map((p,i)=>{
+                posts && posts.map((p,i)=>{
 
                 return (
 
@@ -35,14 +40,14 @@ export default function Post({posts}:PostsPageProps) {
                                 <Link href={'/posts/edit/{id}'} as={`/posts/edit?id=${p.id}`}>
                                     <a>edit</a>
                                 </Link>
-                                <button onClick={()=>{postsAPI.deletePost(p.id)}} className='btn btn-danger ml-5'> delete</button>
+                                <button onClick={()=>{deletePost(p.id)}} className='btn btn-danger ml-5'> delete</button>
                             </div>
 
                         </div>
 
 
                 </li>)
-            }):" No posts"
+            })
             }
             </ul>
             <button onClick={()=>{Router.push('/')}}>Go back to home</button>
@@ -50,11 +55,20 @@ export default function Post({posts}:PostsPageProps) {
     )
 }
 
+//
+// Post.getInitialProps = async ({req}:NextPageContext)=>{
+//     const  posts = await postsAPI.getPosts()
+//
+//     return {
+//                 posts:posts
+//             }
+// }
 
-Post.getInitialProps = async ({req}:NextPageContext)=>{
-    const  posts = await postsAPI.getPosts()
+const mapStateToProps =(state)=>{
+   return {
+       posts:state.postsReducer.posts,
 
-    return {
-                posts:posts
-            }
+   }
 }
+
+export  default connect(mapStateToProps,{getPosts,deletePost})(Posts)

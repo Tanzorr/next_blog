@@ -1,23 +1,27 @@
 import {useState, useEffect} from 'react'
 import {MainLayout} from "../../components/MainLayout";
-
+import {connect} from "react-redux";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {NextPageContext} from "next";
 import {MyPost} from "../../interfeces/post";
-import {postsAPI} from "../api/api";
+import {postsAPI} from "../../api/api";
 import Comment from "../../components/Comment";
 import CommentForm from "../../components/CommentForm";
+import {getPost} from "../../libs/reducers/posts";
 
 interface PostPageProps {
     post:MyPost
 }
 
-export default function Post({post:serverPost}:PostPageProps) {
-    const [post,setPost]=useState(serverPost)
+function Post({post,getPost}) {
+    //const [post,setPost]=useState(serverPost)
     const router = useRouter()
+    const Post = router.query
 
-        console.log("comment",post)
+    console.log("post",post)
+
+    useEffect(()=>{if(Post.id){getPost(Post.id)}},[Post])
 
     return(
         <MainLayout>
@@ -45,14 +49,22 @@ interface PostNextPageContext extends NextPageContext{
 }
 
 
-export async function getServerSideProps({query,req}:PostNextPageContext) {
-    if (!req){
-        return {posrt:null}
-    }
+// export async function getServerSideProps({query,req}:PostNextPageContext) {
+//     if (!req){
+//         return {posrt:null}
+//     }
+//
+//     //    const response =await fetch(`http://localhost:4200/posts/`+query.id)
+//     const post:MyPost = await  postsAPI.getPost(query.id)
+//       return {
+//          props:{post}
+//     }
+// }
 
-    //    const response =await fetch(`http://localhost:4200/posts/`+query.id)
-    const post:MyPost = await  postsAPI.getPost(query.id)
-      return {
-         props:{post}
+const mapStateToProps = (state)=>{
+    return{
+        post:state.postsReducer.post,
     }
 }
+
+export default connect(mapStateToProps,{getPost})(Post)
