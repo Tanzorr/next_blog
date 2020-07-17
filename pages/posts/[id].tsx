@@ -34,8 +34,8 @@ function Post({post,getPost}:PostPageProps) {
             </div>
             <div>
                 <h3>Post comments</h3>
-                {post.comments.map((c)=>{
-                   return  <Comment  c={c}/>
+                {post.comments.map((c,i)=>{
+                   return  <Comment key={i} c={c}/>
                 })}
                 <CommentForm id={post.id}/>
             </div>
