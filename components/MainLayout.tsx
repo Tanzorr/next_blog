@@ -3,7 +3,7 @@ import Head from "next/head";
 
 
 
-export function MainLayout({children, title='Next App'}) {
+export function MainLayout({children, title='Next App'}:any) {
     return(
         <>
             <Head>
@@ -16,8 +16,8 @@ export function MainLayout({children, title='Next App'}) {
             </Head>
             <nav>
 
-               <Link href={'/posts/naw'}><a>Add Post</a></Link>
-               <Link href={'/posts'}><a>Posts</a></Link>
+               <Link href={'/posts/new'}><a>Add Post</a></Link>
+               <Link href={'/'}><a>Posts</a></Link>
             </nav>
             <main>
                 {children}

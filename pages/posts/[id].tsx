@@ -1,20 +1,17 @@
-import {useState, useEffect} from 'react'
+import { useEffect} from 'react'
 import {MainLayout} from "../../components/MainLayout";
 import {connect} from "react-redux";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {NextPageContext} from "next";
-import {MyPost} from "../../interfeces/post";
-import {postsAPI} from "../../api/api";
 import Comment from "../../components/Comment";
 import CommentForm from "../../components/CommentForm";
 import {getPost} from "../../libs/reducers/posts";
-import CommentType from "../../Interfeces";
+import {Container, Title1, Lin, Input, Textarea, Title2} from "../index.styles"
+import {PostPageProps} from "../../Interfeces";
 
-interface PostPageProps {
-    post:MyPost
-    getPost:void
-}
+
+
 
 function Post({post,getPost}:PostPageProps) {
 
@@ -27,19 +24,19 @@ function Post({post,getPost}:PostPageProps) {
 
     return(
         <MainLayout>
-            <h1>{post.title}</h1>
+            <Title1>{post.title}</Title1>
             <hr/>
-            <div>
+            <Container>
                 {post.body}
-            </div>
+            </Container>
             <div>
-                <h3>Post comments</h3>
+                <Title2>Post comments</Title2>
                 {post.comments.map((c,i)=>{
-                   return  <Comment key={i} c={c}/>
+                   return  <Comment key={i} c={c.c}/>
                 })}
                 <CommentForm id={post.id}/>
             </div>
-            <Link href={'/posts'}><a>Back to all posts</a></Link>
+            <Link href={'/'}><Lin>Back to all posts</Lin></Link>
 
             </MainLayout>
     )
@@ -54,17 +51,7 @@ interface PostNextPageContext extends NextPageContext{
 }
 
 
-// export async function getServerSideProps({query,req}:PostNextPageContext) {
-//     if (!req){
-//         return {posrt:null}
-//     }
-//
-//     //    const response =await fetch(`http://localhost:4200/posts/`+query.id)
-//     const post:MyPost = await  postsAPI.getPost(query.id)
-//       return {
-//          props:{post}
-//     }
-// }
+
 
 const mapStateToProps = (state:any)=>{
     return{
