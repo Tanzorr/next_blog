@@ -19,6 +19,8 @@ export default function New() {
             setBody("");
             await router.push('/posts')
         }
+            alert("both field cannot be empty")
+
 
     }
 

@@ -7,7 +7,12 @@ export  default function CommentForm(id:number){
     const [body,setBody]=useState('')
 
     const sendData=(id:number, body:string)=>{
-        commentsAPI.addCommet(id,body)
+        if(body !==""){
+            commentsAPI.addCommet(id,body)
+        }else {
+            alert("field cannot be empty")
+        }
+
 
         setBody("");
     }
